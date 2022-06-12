@@ -2,10 +2,19 @@ import os
 from time import sleep
 currentpath = os.path.dirname(os.path.realpath(__file__))
 tag = 'assets'
+color1 = 0
+color2 = 0
+color3 = 0
 while True:
     name = str(input(f"File name: "))
     if name[-1:-5:-1] != 'jbo.':
         name = (name +".obj")
+    color = str(input("Do you want to use colors? (y/n): ")).lower()
+    if color == 'y':
+        print("Using RGB color scheme")
+        color1 = int(input("Red: (0-255): "))
+        color2 = int(input("Green: (0-255): "))
+        color3 = int(input("Blue: (0-255): "))
     w = open(f"{currentpath}\{tag}\mid.txt", "w")
     r = open(f"{currentpath}\{tag}\{name}", "r")
     def treat():
@@ -25,7 +34,7 @@ while True:
             cline = cline[1:]
             cline = cline.replace(" ", " ^")
             cline = cline[1:]
-            result = ("particle dust " + '0' + " " + '0' + " " + '0' + " 1 " + cline + " 0 0 0 0 1 force")
+            result = ("particle dust " + str(color1 / 255) + " " + str(color2 / 255) + " " + str(color3 / 255) + " 1 " + cline + " 0 0 0 0 1 force")
             w.write(result + "\n") 
     w.close()
     for i in range(0, 101, 5):
